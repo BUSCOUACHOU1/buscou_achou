@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Buscou Achou - Jequié</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Poppins',sans-serif;background:#f5f7fb;color:#1d1d1d;}
+
+/* HEADER */
+header{position:fixed;top:0;width:100%;z-index:999;padding:18px 70px;display:flex;justify-content:space-between;align-items:center;background:rgba(2,10,35,0.88);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.05);}
+.logo{display:flex;align-items:center;gap:14px;color:white;text-decoration:none;}
+.logo-img{width:52px;height:52px;object-fit:contain;}
+.logo h1{font-size:30px;}
+.logo span{color:#2b6cff;}
+nav{display:flex;gap:30px;}
+nav a{color:white;text-decoration:none;transition:0.3s;}
+nav a:hover{color:#2b6cff;}
+.header-buttons{display:flex;gap:15px;}
+.btn-outline{border:1px solid rgba(255,255,255,0.2);background:transparent;color:white;padding:12px 20px;border-radius:12px;cursor:pointer;font-family:'Poppins',sans-serif;}
+.btn-primary{border:none;background:#2b6cff;color:white;padding:12px 22px;border-radius:12px;cursor:pointer;font-weight:600;font-family:'Poppins',sans-serif;}
+
+/* HERO */
+.hero{min-height:100vh;background:linear-gradient(rgba(2,10,35,0.82),rgba(2,10,35,0.9)),url('https://www.jequie.ba.gov.br/storage/upload/1719528731-28-01-2020-jequie-ter-2019-em-5o-lug-ba-com-mel-saldo-na-ger-de-emp-aponta-min-da-eco-1024x576.jpg1350618221.jpg') center/cover;padding:170px 70px 90px;}
+.hero-content{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center;}
+.hero-left h2{color:white;font-size:78px;line-height:1;margin-bottom:25px;font-weight:800;}
+.hero-left h2 span{color:#2b6cff;}
+.hero-left p{color:#d9d9d9;font-size:22px;line-height:1.6;margin-bottom:35px;max-width:700px;}
+.search-container{background:white;padding:12px;border-radius:20px;display:flex;align-items:center;max-width:760px;box-shadow:0 20px 60px rgba(0,0,0,0.35);}
+.search-container input{flex:1;border:none;outline:none;padding:18px;font-size:16px;font-family:'Poppins',sans-serif;}
+.search-container button{border:none;background:#2b6cff;color:white;padding:18px 30px;border-radius:14px;font-weight:700;cursor:pointer;font-family:'Poppins',sans-serif;}
+.tags{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;}
+.tag{padding:12px 18px;border-radius:40px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.08);color:white;backdrop-filter:blur(10px);font-size:14px;cursor:pointer;transition:0.3s;}
+.tag:hover{background:rgba(43,108,255,0.3);border-color:#2b6cff;}
+.stats{margin-top:40px;background:linear-gradient(135deg,#04163f,#071c58);border-radius:30px;padding:30px;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.stat{color:white;}
+.stat h3{color:#2b6cff;font-size:42px;}
+.stat p{color:#d5d5d5;margin-top:10px;}
+
+/* HERO CARDS */
+.hero-right{position:relative;height:650px;}
+.business-card{position:absolute;width:280px;border-radius:28px;overflow:hidden;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.08);backdrop-filter:blur(14px);box-shadow:0 20px 60px rgba(0,0,0,0.35);transition:0.4s;}
+.business-card:hover{transform:translateY(-10px) !important;}
+.business-card img{width:100%;height:190px;object-fit:cover;}
+.business-content{padding:20px;color:white;}
+.business-content p{color:#d4d4d4;font-size:14px;}
+.card1{top:0;left:40px;transform:rotate(-5deg);}
+.card2{top:180px;right:0;transform:rotate(5deg);}
+.card3{bottom:0;left:80px;transform:rotate(-3deg);}
+
+/* SECTIONS */
+.section{padding:100px 70px;}
+.section-title{margin-bottom:50px;}
+.section-title h2{font-size:46px;color:#0d1c46;}
+.section-title p{margin-top:12px;color:#666;font-size:18px;}
+
+/* EMPRESAS DESTAQUE */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;}
+.card{background:white;border-radius:24px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,0.08);transition:0.4s;cursor:pointer;}
+.card:hover{transform:translateY(-8px);}
+.card img{width:100%;height:200px;object-fit:cover;}
+.card-content{padding:22px;}
+.card-content h3{margin-bottom:10px;color:#0d1c46;}
+.card-content p{color:#666;font-size:14px;}
+.rating{margin-top:14px;color:#f4b400;}
+.card-badge{display:inline-block;margin-top:10px;padding:5px 12px;background:#eef3ff;color:#2b6cff;border-radius:20px;font-size:12px;font-weight:600;}
+
+/* CATEGORIAS */
+.categorias-section{background:#f0f4fa;}
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:20px;}
+.cat-item{background:white;border-radius:22px;padding:28px 20px;text-align:center;box-shadow:0 6px 20px rgba(0,0,0,0.06);transition:0.3s;cursor:pointer;}
+.cat-item:hover{transform:translateY(-6px);background:#2b6cff;}
+.cat-item:hover .cat-name{color:white;}
+.cat-item:hover .cat-count{color:rgba(255,255,255,0.7);}
+.cat-emoji{font-size:38px;margin-bottom:14px;}
+.cat-name{font-size:15px;font-weight:600;color:#0d1c46;margin-bottom:6px;}
+.cat-count{font-size:13px;color:#888;}
+
+/* COMO FUNCIONA */
+.como-section{background:white;}
+.como-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;position:relative;}
+.como-steps::before{content:'';position:absolute;top:50px;left:16%;right:16%;height:2px;background:linear-gradient(90deg,#2b6cff,#27d964);z-index:0;}
+.como-step{text-align:center;position:relative;z-index:1;}
+.step-num{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#2b6cff,#1a50cc);color:white;font-size:30px;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;box-shadow:0 12px 35px rgba(43,108,255,0.35);}
+.step-title{font-size:20px;font-weight:700;color:#0d1c46;margin-bottom:12px;}
+.step-desc{color:#666;line-height:1.6;}
+
+/* DEPOIMENTOS */
+.depoimentos-section{background:#f7f9fc;}
+.dep-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:25px;}
+.dep-card{background:white;border-radius:24px;padding:30px;box-shadow:0 8px 25px rgba(0,0,0,0.06);}
+.dep-stars{color:#f4b400;font-size:18px;margin-bottom:16px;}
+.dep-text{color:#444;line-height:1.7;font-size:15px;margin-bottom:20px;}
+.dep-author{display:flex;align-items:center;gap:14px;}
+.dep-avatar{width:50px;height:50px;border-radius:50%;object-fit:cover;}
+.dep-info h4{font-size:15px;color:#0d1c46;font-weight:600;}
+.dep-info p{font-size:13px;color:#888;}
+
+/* MAPA BAIRROS */
+.bairros-section{background:white;}
+.bairros-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;}
+.bairros-list{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.bairro-item{background:#f5f7fb;border-radius:18px;padding:20px;display:flex;align-items:center;gap:14px;transition:0.3s;cursor:pointer;}
+.bairro-item:hover{background:#eef3ff;transform:translateX(6px);}
+.bairro-icon{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#2b6cff,#1a50cc);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.bairro-name{font-weight:600;color:#0d1c46;font-size:15px;}
+.bairro-count{font-size:13px;color:#888;margin-top:3px;}
+.mapa-visual{background:linear-gradient(135deg,#04163f,#071c58);border-radius:30px;padding:40px;color:white;text-align:center;}
+.mapa-visual h3{font-size:28px;margin-bottom:16px;}
+.mapa-visual p{color:#b8c4e0;margin-bottom:30px;}
+.mapa-stat{background:rgba(255,255,255,0.08);border-radius:18px;padding:20px;margin-bottom:14px;}
+.mapa-stat h4{font-size:32px;color:#2b6cff;font-weight:800;}
+.mapa-stat p{color:#ccc;margin-top:6px;}
+
+/* EXPERIÊNCIA CONSUMIDOR */
+.consumidor-section{background:#f7f9fc;}
+.consumidor-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:30px;}
+.consumer-search,.consumer-anuncios,.consumer-data{background:white;border-radius:28px;padding:30px;box-shadow:0 10px 35px rgba(0,0,0,0.05);}
+.consumer-search h3,.consumer-anuncios h3,.consumer-data h3{margin-bottom:20px;color:#0d1c46;}
+.consumer-box{display:flex;margin-top:25px;gap:12px;}
+.consumer-box input{flex:1;border:none;background:#f0f4fa;padding:16px;border-radius:14px;font-family:'Poppins',sans-serif;outline:none;}
+.consumer-box button{border:none;background:#27d964;color:white;padding:16px 22px;border-radius:14px;cursor:pointer;font-family:'Poppins',sans-serif;font-weight:600;}
+.consumer-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;}
+.consumer-tags span{background:#eef3ff;padding:10px 14px;border-radius:30px;font-size:13px;cursor:pointer;}
+.ad-card{display:flex;gap:16px;align-items:center;margin-top:20px;padding:15px;background:#f7f9fc;border-radius:20px;}
+.ad-card img{width:90px;height:90px;object-fit:cover;border-radius:18px;}
+.ad-card h4{color:#0d1c46;margin-bottom:4px;}
+.ad-card p{font-size:13px;color:#888;}
+.data-card{background:#f7f9fc;border-radius:22px;padding:25px;margin-top:18px;}
+.data-card h4{font-size:38px;color:#27d964;font-weight:800;}
+.data-card p{color:#666;margin-top:6px;}
+
+/* BLOCO ANUNCIE — empresa-interface + CTA juntos */
+.anuncie-bloco{background:linear-gradient(rgba(4,16,45,0.95),rgba(4,16,45,0.98));color:white;padding:100px 70px;}
+
+/* parte superior: "Faça sua empresa crescer" */
+.empresa-container{display:grid;grid-template-columns:1.1fr 1fr;gap:60px;align-items:center;margin-bottom:90px;padding-bottom:80px;border-bottom:1px solid rgba(255,255,255,0.08);}
+.mini-tag{display:inline-block;padding:10px 18px;background:rgba(43,108,255,0.15);border-radius:40px;margin-bottom:25px;color:#2b6cff;font-size:14px;font-weight:600;letter-spacing:1px;}
+.empresa-left h2{font-size:52px;margin-bottom:25px;line-height:1.1;}
+.empresa-left h2 span{color:#2b6cff;}
+.empresa-left p{color:#d6d6d6;line-height:1.7;margin-bottom:35px;font-size:18px;}
+.empresa-benefits{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+.empresa-benefit{background:rgba(255,255,255,0.05);border-radius:24px;padding:25px;border:1px solid rgba(255,255,255,0.06);transition:0.3s;}
+.empresa-benefit:hover{background:rgba(43,108,255,0.12);}
+.empresa-benefit h3{margin-bottom:10px;color:#2b6cff;font-size:16px;}
+.empresa-benefit p{color:#b8c4e0;font-size:14px;}
+.dashboard-card{background:white;color:#111;padding:35px;border-radius:30px;box-shadow:0 20px 60px rgba(0,0,0,0.35);}
+.dashboard-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;}
+.dashboard-top span{background:#2b6cff;padding:8px 14px;border-radius:20px;color:white;font-weight:700;font-size:13px;}
+.dashboard-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.dash-item{background:#f5f7fb;padding:20px;border-radius:20px;text-align:center;}
+.dash-item h4{font-size:26px;color:#0d1c46;font-weight:800;}
+.dash-item p{font-size:13px;color:#888;margin-top:4px;}
+.dashboard-chart{margin-top:35px;display:flex;align-items:flex-end;gap:16px;height:160px;}
+.bar{flex:1;background:#d8dff0;border-radius:18px 18px 0 0;}
+.bar:nth-child(1){height:40%;}
+.bar:nth-child(2){height:70%;}
+.bar:nth-child(3){height:100%;background:#2b6cff;}
+.bar:nth-child(4){height:80%;}
+.bar:nth-child(5){height:55%;}
+
+/* parte inferior: CTA WhatsApp */
+.anuncie-cta{text-align:center;}
+.anuncie-cta h2{font-size:48px;font-weight:800;margin-bottom:18px;}
+.anuncie-cta h2 span{color:#2b6cff;}
+.anuncie-cta > p{color:#d6d6d6;font-size:19px;max-width:640px;margin:0 auto 50px;line-height:1.7;}
+.anuncie-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;max-width:980px;margin:0 auto 50px;}
+.anuncie-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:24px;padding:28px 22px;text-align:left;transition:0.3s;}
+.anuncie-card:hover{background:rgba(43,108,255,0.14);transform:translateY(-6px);}
+.anuncie-card .icon{font-size:34px;margin-bottom:14px;}
+.anuncie-card h4{font-size:16px;margin-bottom:10px;color:#fff;font-weight:600;}
+.anuncie-card p{font-size:13px;color:#b8c4e0;line-height:1.6;}
+.wpp-btn{display:inline-flex;align-items:center;gap:14px;background:#25D366;color:white;padding:22px 44px;border-radius:20px;font-size:20px;font-weight:700;text-decoration:none;box-shadow:0 16px 50px rgba(37,211,102,0.3);transition:0.3s;}
+.wpp-btn:hover{background:#1ebe59;transform:translateY(-4px);box-shadow:0 22px 60px rgba(37,211,102,0.45);}
+.wpp-btn svg{width:28px;height:28px;fill:white;flex-shrink:0;}
+.wpp-note{margin-top:18px;color:#6b7fa8;font-size:14px;}
+
+/* FOOTER */
+footer{background:#04112f;color:white;padding:70px;}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;}
+.footer-logo{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.footer-logo h3{font-size:22px;}
+.footer-logo span{color:#2b6cff;}
+footer h3{margin-bottom:20px;font-size:18px;}
+footer ul{list-style:none;}
+footer ul li{margin-bottom:12px;color:#cfcfcf;font-size:14px;}
+footer ul li a{color:#cfcfcf;text-decoration:none;transition:0.3s;}
+footer ul li a:hover{color:#2b6cff;}
+.footer-desc{color:#8899bb;line-height:1.7;font-size:14px;}
+.footer-wpp{display:inline-flex;align-items:center;gap:8px;background:#25D366;color:white;padding:12px 20px;border-radius:12px;text-decoration:none;font-weight:600;font-size:14px;margin-top:18px;}
+.copyright{margin-top:50px;border-top:1px solid rgba(255,255,255,0.08);padding-top:30px;text-align:center;color:#aaa;font-size:14px;}
+
+/* RESPONSIVO */
+@media(max-width:1100px){
+  .hero-content,.empresa-container,.consumidor-grid,.bairros-grid{grid-template-columns:1fr;}
+  .hero-right{height:auto;display:flex;flex-direction:column;gap:20px;}
+  .business-card{position:relative;width:100%;max-width:450px;transform:none !important;left:auto;right:auto;top:auto;bottom:auto;}
+  .stats{grid-template-columns:repeat(2,1fr);}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+  .anuncie-cards{grid-template-columns:repeat(2,1fr);}
+  .como-steps::before{display:none;}
+}
+@media(max-width:768px){
+  header{padding:20px;flex-direction:column;gap:20px;}
+  nav{flex-wrap:wrap;justify-content:center;}
+  .hero{padding:220px 20px 70px;}
+  .hero-left h2{font-size:52px;}
+  .search-container,.consumer-box{flex-direction:column;}
+  .search-container button,.consumer-box button{width:100%;}
+  .section{padding:70px 20px;}
+  .anuncie-bloco{padding:70px 20px;}
+  .stats{grid-template-columns:1fr;}
+  .dashboard-stats{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr;}
+  .anuncie-cards{grid-template-columns:1fr;}
+  .como-steps{grid-template-columns:1fr;gap:40px;}
+  .bairros-list{grid-template-columns:1fr;}
+  .empresa-left h2{font-size:38px;}
+  .anuncie-cta h2{font-size:34px;}
+  .cat-grid{grid-template-columns:repeat(3,1fr);}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a href="#inicio" class="logo">
+    <img src="Logo01.png" alt="Logo" class="logo-img">
+    <h1>Buscou <span>Achou</span></h1>
+  </a>
+  <nav>
+    <a href="#inicio">Início</a>
+    <a href="#empresas">Empresas</a>
+    <a href="#categorias">Categorias</a>
+    <a href="#como-funciona">Como funciona</a>
+    <a href="#anuncie">Anuncie</a>
+  </nav>
+  <div class="header-buttons">
+    <button class="btn-outline">Entrar</button>
+    <button class="btn-primary" onclick="window.open('https://wa.me/557399999999?text=Olá!%20Gostaria%20de%20cadastrar%20minha%20empresa%20no%20Buscou%20Achou.')">Cadastrar empresa</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-content">
+    <div class="hero-left">
+      <h2>Encontre tudo em <span>Jequié</span></h2>
+      <p>Descubra restaurantes, mercados, oficinas, farmácias e serviços locais em uma única plataforma. O maior catálogo comercial digital de Jequié.</p>
+      <div class="search-container">
+        <input type="text" placeholder="Buscar pizzarias, mercados, oficinas...">
+        <button>Buscar</button>
+      </div>
+      <div class="tags">
+        <div class="tag">🍕 Pizzarias</div>
+        <div class="tag">🛒 Mercados</div>
+        <div class="tag">🚗 Oficinas</div>
+        <div class="tag">💊 Farmácias</div>
+        <div class="tag">🏋 Academias</div>
+      </div>
+      <div class="stats">
+        <div class="stat"><h3>+2.500</h3><p>Empresas cadastradas</p></div>
+        <div class="stat"><h3>+50 mil</h3><p>Buscas mensais</p></div>
+        <div class="stat"><h3>30+</h3><p>Categorias</p></div>
+        <div class="stat"><h3>100%</h3><p>Focado em Jequié</p></div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="business-card card1">
+        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591">
+        <div class="business-content"><h3>Pizzaria Sabor Top</h3><p>⭐ 4.8 • Centro</p></div>
+      </div>
+      <div class="business-card card2">
+        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1">
+        <div class="business-content"><h3>Beleza Pura</h3><p>⭐ 4.7 • Jequiezinho</p></div>
+      </div>
+      <div class="business-card card3">
+        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70">
+        <div class="business-content"><h3>Auto Tech</h3><p>⭐ 4.9 • Mandacaru</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EMPRESAS EM DESTAQUE -->
+<section class="section" id="empresas">
+  <div class="section-title">
+    <h2>Empresas em destaque</h2>
+    <p>Os negócios mais bem avaliados pelos moradores de Jequié</p>
+  </div>
+  <div class="cards">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591">
+      <div class="card-content">
+        <h3>Pizzaria Sabor Top</h3>
+        <p>Pizzaria • Centro</p>
+        <div class="rating">⭐ 4.8 (312 avaliações)</div>
+        <span class="card-badge">🔥 Mais buscado</span>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858">
+      <div class="card-content">
+        <h3>Móveis Jequié</h3>
+        <p>Móveis & Decoração • Jequiezinho</p>
+        <div class="rating">⭐ 4.7 (198 avaliações)</div>
+        <span class="card-badge">✅ Verificado</span>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70">
+      <div class="card-content">
+        <h3>Auto Tech</h3>
+        <p>Oficina Mecânica • Mandacaru</p>
+        <div class="rating">⭐ 4.9 (420 avaliações)</div>
+        <span class="card-badge">🏆 Top da cidade</span>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438">
+      <div class="card-content">
+        <h3>Power Fit</h3>
+        <p>Academia • Centro</p>
+        <div class="rating">⭐ 4.8 (275 avaliações)</div>
+        <span class="card-badge">💪 Em alta</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIAS -->
+<section class="section categorias-section" id="categorias">
+  <div class="section-title">
+    <h2>Explore por categoria</h2>
+    <p>Mais de 30 categorias para você encontrar exatamente o que precisa</p>
+  </div>
+  <div class="cat-grid">
+    <div class="cat-item"><div class="cat-emoji">🍔</div><div class="cat-name">Restaurantes</div><div class="cat-count">+180 empresas</div></div>
+    <div class="cat-item"><div class="cat-emoji">🛒</div><div class="cat-name">Mercados</div><div class="cat-count">+95 empresas</div></div>
+    <div class="cat-item"><div class="cat-emoji">🚗</div><div class="cat-name">Oficinas</div><div class="cat-count">+60 empresas</div></div>
+    <div class="cat-item"><div class="cat-emoji">💊</div><div class="cat-name">Farmácias</div><div class="cat-count">+40 empresas</div></div>
+    <div class="cat-item"><div class="cat-emoji">🏋</div><div class="cat-name">Academias</div><div class="cat-count">+28 empresas</div></div>
+    <div class="cat-item"><div class="cat-emoji">💇</div><div class="cat-name">Salões</div><div class="cat-count">+110 empresas</div></div>
+    <div class="cat-item"><div class="cat-emoji">🏥</div><div class="cat-name">Clínicas</div><div class="cat-count">+55 empresas</div></div>
+    <div class="cat-item"><div class="cat-emoji">🎓</div><div class="cat-name">Educação</div><div class="cat-count">+45 empresas</div></div>
+    <div class="cat-item"><div class="cat-emoji">🏠</div><div class="cat-name">Imóveis</div><div class="cat-count">+70 empresas</div></div>
+    <div class="cat-item"><div class="cat-emoji">🔧</div><div class="cat-name">Serviços</div><div class="cat-count">+200 empresas</div></div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="section como-section" id="como-funciona">
+  <div class="section-title" style="text-align:center;">
+    <h2>Como funciona?</h2>
+    <p>Simples, rápido e gratuito para o consumidor</p>
+  </div>
+  <div class="como-steps">
+    <div class="como-step">
+      <div class="step-num">1</div>
+      <div class="step-title">Busque o que precisa</div>
+      <div class="step-desc">Digite o produto, serviço ou empresa que você procura. Nossa plataforma mostra os melhores resultados em Jequié.</div>
+    </div>
+    <div class="como-step">
+      <div class="step-num">2</div>
+      <div class="step-title">Compare e escolha</div>
+      <div class="step-desc">Veja avaliações, localização, horário de funcionamento e informações de contato antes de decidir.</div>
+    </div>
+    <div class="como-step">
+      <div class="step-num">3</div>
+      <div class="step-title">Encontre e vá!</div>
+      <div class="step-desc">Com um clique você já sabe exatamente onde fica e como chegar. Simples assim.</div>
+    </div>
+  </div>
+</section>
+
+<!-- BAIRROS DE JEQUIÉ -->
+<section class="section bairros-section">
+  <div class="bairros-grid">
+    <div>
+      <div class="section-title">
+        <h2>Cobrindo toda a cidade</h2>
+        <p>Empresas de todos os bairros de Jequié reunidas em um só lugar</p>
+      </div>
+      <div class="bairros-list">
+        <div class="bairro-item"><div class="bairro-icon">🏙️</div><div><div class="bairro-name">Centro</div><div class="bairro-count">+620 empresas</div></div></div>
+        <div class="bairro-item"><div class="bairro-icon">🌿</div><div><div class="bairro-name">Jequiezinho</div><div class="bairro-count">+310 empresas</div></div></div>
+        <div class="bairro-item"><div class="bairro-icon">🏘️</div><div><div class="bairro-name">Mandacaru</div><div class="bairro-count">+185 empresas</div></div></div>
+        <div class="bairro-item"><div class="bairro-icon">🌄</div><div><div class="bairro-name">Joaquim Romão</div><div class="bairro-count">+140 empresas</div></div></div>
+        <div class="bairro-item"><div class="bairro-icon">🛣️</div><div><div class="bairro-name">Cidade Nova</div><div class="bairro-count">+100 empresas</div></div></div>
+        <div class="bairro-item"><div class="bairro-icon">🏫</div><div><div class="bairro-name">Cachoeirinha</div><div class="bairro-count">+100 empresas</div></div></div>
+      </div>
+    </div>
+    <div class="mapa-visual">
+      <h3>📍 Jequié, Bahia</h3>
+      <p>Plataforma 100% focada na cidade. Encontre negócios perto de você.</p>
+      <div class="mapa-stat"><h4>+2.500</h4><p>Empresas cadastradas na cidade</p></div>
+      <div class="mapa-stat"><h4>20+</h4><p>Bairros cobertos</p></div>
+      <div class="mapa-stat"><h4>+50 mil</h4><p>Buscas mensais realizadas</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIÊNCIA DO CONSUMIDOR -->
+<section class="section consumidor-section">
+  <div class="section-title">
+    <h2>Experiência do consumidor</h2>
+    <p>Uma plataforma pensada para facilitar sua busca no dia a dia</p>
+  </div>
+  <div class="consumidor-grid">
+    <div class="consumer-search">
+      <h3>🔍 Busca Inteligente</h3>
+      <p>Encontre empresas e serviços rapidamente em Jequié.</p>
+      <div class="consumer-box">
+        <input type="text" placeholder="Buscar restaurantes no Centro...">
+        <button>Buscar</button>
+      </div>
+      <div class="consumer-tags">
+        <span>🍔 Restaurantes</span>
+        <span>🛒 Mercados</span>
+        <span>🚗 Oficinas</span>
+        <span>🏥 Clínicas</span>
+      </div>
+    </div>
+    <div class="consumer-anuncios">
+      <h3>⭐ Empresas em destaque</h3>
+      <div class="ad-card">
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4">
+        <div><h4>Sertão Grill</h4><p>Centro • Delivery</p></div>
+      </div>
+      <div class="ad-card">
+        <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858">
+        <div><h4>Móveis Jequié</h4><p>Jequiezinho • Promoções</p></div>
+      </div>
+    </div>
+    <div class="consumer-data">
+      <h3>📊 Dados da plataforma</h3>
+      <div class="data-card"><h4>+50 mil</h4><p>Pesquisas locais mensais</p></div>
+      <div class="data-card"><h4>+2.500</h4><p>Empresas cadastradas</p></div>
+      <div class="data-card"><h4>92%</h4><p>Usuários satisfeitos</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section class="section depoimentos-section">
+  <div class="section-title">
+    <h2>O que dizem os usuários da Buscou Achou</h2>
+    <p>Avaliações reais de quem usa o Buscou Achou no dia a dia</p>
+  </div>
+  <div class="dep-grid">
+    <div class="dep-card">
+      <div class="dep-stars">⭐⭐⭐⭐⭐</div>
+      <p class="dep-text">"Precisei de um mecânico de urgência e em segundos achei a Auto Tech aqui no Mandacaru. Incrível como facilita nossa vida!"</p>
+      <div class="dep-author">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" class="dep-avatar" alt="">
+        <div class="dep-info"><h4>Rodrigo Almeida</h4><p>Mandacaru, Jequié</p></div>
+      </div>
+    </div>
+    <div class="dep-card">
+      <div class="dep-stars">⭐⭐⭐⭐⭐</div>
+      <p class="dep-text">"Uso toda semana para achar promoções de mercado perto de casa. Não imagino mais como era antes sem o Buscou Achou."</p>
+      <div class="dep-author">
+        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop" class="dep-avatar" alt="">
+        <div class="dep-info"><h4>Carla Mendonça</h4><p>Jequiezinho, Jequié</p></div>
+      </div>
+    </div>
+    <div class="dep-card">
+      <div class="dep-stars">⭐⭐⭐⭐⭐</div>
+      <p class="dep-text">"Encontrei um salão de beleza ótimo que nem sabia que existia aqui no Centro. As avaliações me deram muita segurança na escolha."</p>
+      <div class="dep-author">
+        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop" class="dep-avatar" alt="">
+        <div class="dep-info"><h4>Mariana Costa</h4><p>Centro, Jequié</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOCO EMPRESAS + ANUNCIE -->
+<section class="anuncie-bloco" id="anuncie">
+
+  <!-- "Faça sua empresa crescer" -->
+  <div class="empresa-container">
+    <div class="empresa-left">
+      <span class="mini-tag">PLATAFORMA PARA NEGÓCIOS</span>
+      <h2>Faça sua empresa crescer em <span>Jequié</span></h2>
+      <p>Conecte sua empresa aos moradores de Jequiezinho, Centro, Joaquim Romão, Mandacaru e toda a região.</p>
+      <div class="empresa-benefits">
+        <div class="empresa-benefit"><h3>📈 Mais clientes</h3><p>Ganhe visibilidade nas buscas locais.</p></div>
+        <div class="empresa-benefit"><h3>📍 Destaque regional</h3><p>Apareça primeiro nos bairros da cidade.</p></div>
+        <div class="empresa-benefit"><h3>📊 Relatórios</h3><p>Visualize acessos e desempenho.</p></div>
+        <div class="empresa-benefit"><h3>🚀 Promoções</h3><p>Divulgue campanhas rapidamente.</p></div>
+      </div>
+    </div>
+    <div class="empresa-right">
+      <div class="dashboard-card">
+        <div class="dashboard-top">
+          <h3>Dashboard Empresarial</h3>
+          <span>● Online</span>
+        </div>
+        <div class="dashboard-stats">
+          <div class="dash-item"><h4>+8.420</h4><p>Visualizações</p></div>
+          <div class="dash-item"><h4>1.240</h4><p>Cliques</p></div>
+          <div class="dash-item"><h4>+340%</h4><p>Alcance</p></div>
+        </div>
+        <div class="dashboard-chart">
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA WhatsApp -->
+  <div class="anuncie-cta">
+    <h2>Quer divulgar sua empresa no <span>Buscou Achou</span>?</h2>
+    <p>Entre em contato pelo WhatsApp e saiba como colocar o seu negócio no maior catálogo digital de Jequié. Atendimento rápido e personalizado.</p>
+    <div class="anuncie-cards">
+      <div class="anuncie-card"><div class="icon">📍</div><h4>Visibilidade local</h4><p>Seja encontrado por clientes do seu bairro e de toda Jequié.</p></div>
+      <div class="anuncie-card"><div class="icon">📊</div><h4>Acompanhe os resultados</h4><p>Dashboard com visualizações, cliques e desempenho da sua empresa.</p></div>
+      <div class="anuncie-card"><div class="icon">🚀</div><h4>Cadastro simples</h4><p>Nossa equipe cuida de tudo. Em minutos sua empresa está no ar.</p></div>
+      <div class="anuncie-card"><div class="icon">💬</div><h4>Suporte humano</h4><p>Fale diretamente com a equipe via WhatsApp, sem burocracia.</p></div>
+    </div>
+    <a href="https://wa.me/557399999999?text=Olá!%20Gostaria%20de%20divulgar%20minha%20empresa%20no%20Buscou%20Achou." target="_blank" class="wpp-btn">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Falar pelo WhatsApp
+    </a>
+    <p class="wpp-note">Atendimento de segunda a sábado, das 8h às 18h.</p>
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo"><h3>Buscou <span>Achou</span></h3></div>
+      <p class="footer-desc">Plataforma digital de localização de empresas e serviços em Jequié. Conectando moradores aos melhores negócios locais.</p>
+      <a href="https://wa.me/557399999999" target="_blank" class="footer-wpp">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        (73) 99999-9999
+      </a>
+    </div>
+    <div>
+      <h3>Navegação</h3>
+      <ul>
+        <li><a href="#inicio">Início</a></li>
+        <li><a href="#empresas">Empresas</a></li>
+        <li><a href="#categorias">Categorias</a></li>
+        <li><a href="#como-funciona">Como funciona</a></li>
+        <li><a href="#anuncie">Anuncie</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Institucional</h3>
+      <ul>
+        <li><a href="#">Sobre nós</a></li>
+        <li><a href="#">Contato</a></li>
+        <li><a href="#">Privacidade</a></li>
+        <li><a href="#">Termos de uso</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Contato</h3>
+      <ul>
+        <li>contato@buscouachou.com</li>
+        <li>(73) 99999-9999</li>
+        <li>Jequié - BA</li>
+      </ul>
+    </div>
+  </div>
+  <div class="copyright">© 2026 Buscou Achou — Todos os direitos reservados.</div>
+</footer>
+
+</body>
+</html>
